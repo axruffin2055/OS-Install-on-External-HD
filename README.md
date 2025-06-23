@@ -1,1 +1,1 @@
-# OS-istall-on-external-HD
+# OS-install-on-external-HD
