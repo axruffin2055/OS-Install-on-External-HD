@@ -1,0 +1,124 @@
+# OS-install-on-external-HD
+
+Locate your disk or External HD:
+lsblk    (This command will list block devices) 
+
+On /dev/sdx follow the steps (!!! The: x : is replaced by the letter of your external HD disk) 
+
+Step-by-Step
+
+Wipe existing partition table clean:
+sudo wipefs -a /dev/sdx
+sudo parted /dev/sdx mklabel gpt     (UEFI is designed to work with GPT)
+
+Create UEFI System Partition (ESP).
+The parted command helps us manipulate the disk:
+sudo parted /dev/sdx                  (We are inside/on the disk)
+unit MiB                              (Set display units)
+mkpart ESP fat32 1MiB 513MiB          (Partition space needed for /boot/efi)
+set 1 esp on
+ 
+Create /boot partition:
+mkpart primary ext4 513MiB 1025MiB       (Partition space needed for kernel & initramfs)
+
+Create LVM Physical Volume:
+mkpart primary 1025MiB 100%       (Use the rest of memory disk space)
+set 3 lvm on
+
+Check partition layout:
+print
+
+Quit parted command:
+quit
+
+Format the Partitions (We are creating/setting the filesystems on our LVM's partitions).
+Format the UEFI System Partition:
+sudo mkfs.fat -F32 /dev/sdx1
+
+Format the /boot partition:
+sudo mkfs.ext4 /dev/sdx2
+
+Set up the LVM Physical Volume (Logical Volume Manager (LVM) tool has it's own built-in command).
+Install LVM tools:
+sudo apt install lvm2
+
+Create a Physical Volume:
+sudo pvcreate /dev/sdx3     (Initialize the disk or partition for use by LVM)
+
+Create a Volume Group:
+sudo vgcreate vg_external /dev/sdx3          (Think book cover)
+
+Create Logical Volumes as needed. These are the important ones:
+
+sudo lvcreate -L 50G -n lv_root vg_external   (Think page inside book cover)
+sudo lvcreate -L 5G  -n lv_swap vg_external   (Think page inside book cover)
+sudo lvcreate -L 80G  -n lv_var vg_external   (Think page inside book cover)
+sudo lvcreate -L 50G  -n lv_tmp vg_external   (Think page inside book cover)
+sudo lvcreate -L 500G -n lv_home vg_external  (Think page inside book cover)
+
+Format the logical volume (Now we are creating the filesystem for our lvm):
+
+sudo mkfs.ext4 /dev/vg_external/lv_root
+sudo mkfs.ext4 /dev/vg_external/lv_swap
+sudo mkfs.ext4 /dev/vg_external/lv_var
+sudo mkfs.ext4 /dev/vg_external/lv_tmp
+sudo mkfs.ext4 /dev/vg_external/lv_home
+
+Download Operating System of your choice to your C: drive. I am installing Rocky Linux:
+https://rockylinux.org/download
+In the Rocky Linux download page, look for:
+Rocky-9.x-x86_64-dvd.iso
+And download: CHECKSUM.ios   (Added security on files)
+
+Download a software tool to write the ISO to a bootable USB stick
+I am using Balena Etcher:
+Download: https://balena.io/etcher
+
+Open a terminal and execute these command on the file just downloaded:
+Make Balena Etcher executable:
+chmod +x balenaEtcher-*-x64.AppImage
+
+Run it:
+./balenaEtcher-*-x64.AppImage
+
+Open it:
+Select the OS of your choice: Rocky-9.4-x86_64-dvd.iso
+Choose your USB stick (NOT your external HD):
+Click on Flash
+
+Restart your computer, while it is booting up hold or keep pressing the delete or F12 or F3 or etc button.
+You are now in the BIOS configuration menu.
+Select the boot menu:
+Make sure your BIOS/UEFI is set to boot in UEFI mode.
+Take a picture of the boot options numbered 1 - 5 (You need to change it back or if you do not change back, remove the USB flash drive every time you boot your computer)
+Change #1 Boot option to Flash or USB so your computer can boot up using the USB stick             
+
+Now let your computer bootup. 
+We have to boot Rocky 9 into the installer (via USB stick).
+In the Rocky installer, select your external hard drive (/dev/sdx) as the installation target.
+Go through the installer steps: Language, Keyboard, Network, Mirror settings, etc.
+
+At Storage configuration, we already created our UEFI System Partition (We took the long and learning way)
+But we could have created, named, set size, and set filesystem type here.
+Choose Custom Storage Layout:
+Select your external drive (e.g. /dev/sdb)
+In the partitioning screen:
+Create a new GPT partition table (if prompted)
+Then create a new partition:
+Size: 500MB
+Use as: EFI System Partition
+Filesystem: FAT32
+Mount point: /boot/efi
+ Create /boot Partition
+
+Still on the same external drive:
+Create a new partition:
+Size: 1024MB (1GB)
+Use as: Ext4 (or you can use XFS if you’ve installed xfsprogs, though Ubuntu defaults to ext4 for /boot)
+Mount point: /boot    
+
+Finish Installation
+Continue with the rest of the installation steps (package selection, etc.)
+Once done: Reboot the system.
+
+
