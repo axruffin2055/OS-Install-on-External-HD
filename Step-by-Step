@@ -123,12 +123,14 @@ sde
   │     ext4   1.0         957e5272-5200-44c6-9885-bd2fad2925ed
   └─vg_external-lv_home
         ext4   1.0         1170d3ca-f387-47e2-9d94-9d41374a51e9
+
 Or you can use lvm's command to check the volume group (VG):
 vgs
 Output:
  VG          #PV #LV #SN Attr   VSize  VFree
  vg_external   1   5   0 wz--n- <4.55t <3.77t     (In VG you can manage many parted disks. LVM manage partition disk similar to books. VG manage parted disk 
                                                    similar to pages. Here we have one partition named vg_external, but think, we have one book with a title)
+
 And use lvm's command to check the the Logical Volume (LV)
 lvs
 Output:
@@ -153,10 +155,10 @@ Download: https://balena.io/etcher
 
 Open a terminal and execute these command on the file just downloaded:
 Make Balena Etcher executable:
-chmod +x balenaEtcher-*-x64.AppImage
+chmod +x balenaEtcher-*-x64.AppImage  (The: * : means you have to add the version of the software you downloaded)
 
 Run it:
-./balenaEtcher-*-x64.AppImage
+./balenaEtcher-*-x64.AppImage         (My version is: )
 
 Open it:
 Select the OS of your choice: Rocky-9.4-x86_64-dvd.iso
