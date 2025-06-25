@@ -1,4 +1,11 @@
 # OS-install-on-external-HD
+Configure the BIOS:
+Restart your computer. While it is booting up, hold or keep pressing the delete or F12 or F3 or etc button.
+You are now in the BIOS configuration menu.
+Select the boot menu:
+Make sure your BIOS/UEFI is set to boot in UEFI mode.
+Take a picture of the boot options numbered 1 - 5 (You need to change it back or if you do not change back, remove the USB flash drive every time you boot your computer)
+Change #1 Boot option to Flash or USB so your computer can boot up using the USB stick             
 
 Locate your disk or External HD:
 lsblk    (This command will list block devices) 
@@ -158,19 +165,13 @@ Make Balena Etcher executable:
 chmod +x balenaEtcher-*-x64.AppImage  (The: * : means you have to add the version of the software you downloaded)
 
 Run it:
-./balenaEtcher-*-x64.AppImage         (My version is: )
+./balenaEtcher-*-x64.AppImage         (My version is: balenaEtcher-2.1.2.Setup.exe)
 
-Open it:
+Open balenaEtcher:
 Select the OS of your choice: Rocky-9.4-x86_64-dvd.iso
 Choose your USB stick (NOT your external HD):
 Click on Flash
 
-Restart your computer, while it is booting up hold or keep pressing the delete or F12 or F3 or etc button.
-You are now in the BIOS configuration menu.
-Select the boot menu:
-Make sure your BIOS/UEFI is set to boot in UEFI mode.
-Take a picture of the boot options numbered 1 - 5 (You need to change it back or if you do not change back, remove the USB flash drive every time you boot your computer)
-Change #1 Boot option to Flash or USB so your computer can boot up using the USB stick             
 
 Now let your computer bootup. 
 We have to boot Rocky 9 into the installer (via USB stick).
