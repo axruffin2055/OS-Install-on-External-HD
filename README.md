@@ -14,18 +14,31 @@ are studied, learned, and practiced from Linux Professional Institute (LPI). Als
 Start from the buttom ground and learn up. You maybe surprised on what you know verse how the book clearly break down technologies.
 
 Description: 
-This project installs a Linux operating system (OS) on a external hard drive (HD). This project
-should help your understand, Basic Input/Output System (BIOS), Master Boot Record (MBR) vs GUID Partition Table (GPT),
-Unified Extensible Firmware Interface (UEFI), Logical Volume Manager (LVM), and OS file system types.
-We will be manually configuring the OS that is being install to the HD. Again, topic can be better understood 
-by using LPI's book: https://learning.lpi.org/en/learning-materials/101-500/
-Featuresfeatures: List key features, What problem does it solve? Any highlights that make it stand out
+This project installs a Linux operating system (OS) on a external hard drive (HD).
+This project should help your understand, Basic Input/Output System (BIOS), 
+Master Boot Record (MBR) vs GUID Partition Table (GPT), Unified Extensible Firmware Interface (UEFI), 
+Logical Volume Manager (LVM), and OS file system types.
+We will be manually configuring the OS that is being install to the HD. 
+Again, topic can be better understood by using LPI's book: 
+https://learning.lpi.org/en/learning-materials/101-500/
+
+Features:
+I am using Windows Subsystem for Linux (WSL2), which runs beside Windows 11 OS.
+WSL2 acts as a virtual machine (VM) that mounts Linux kernal to use
+Linux's distributions. Depending on how the Linux kernal is being used,
+Windows OS will give you errors, hardship, and compatibilities problems
+because Linux kernal cannot see outside of WSL2; therefore, leading you 
+to find a work around. WSL2 adds a different trail by fire type of learn; however, 
+I also believe that once you have conquered the trails (software and hardware errors or non-compatibilities) 
+one should opt on the side of effciency and performance. Now I have Rocky Linux 9 installed
+on my 5TB external HD because Linux has a wide-range of compatibility with
+different hardwares and softwares.
 
 Technologies Used: This is what I am using to install Linux OS.
-Window 11 OS on a laptop 
-Linux kernal with distribution (I am using: Windows Subsystem for Linux (WSL2)) 
-Distributions: Debian (Package Manager) and Ubuntu (File & System file management) 
-A second monitor screen 
+- Window 11 OS on a laptop 
+- Linux kernal (WSL2 )with distribution 
+- Distributions: Debian (Package Manager) and Ubuntu (File & System file management) 
+- A second monitor screen 
 - I recommend using a Linux native OS vs WSL2 
 
 Prerequisites: List things the user needs before they can run or install your project
