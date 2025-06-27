@@ -22,11 +22,11 @@ by using LPI's book: https://learning.lpi.org/en/learning-materials/101-500/
 Featuresfeatures: List key features, What problem does it solve? Any highlights that make it stand out
 
 Technologies Used: This is what I am using to install Linux OS.
-Window 11 OS on a laptop
-Linux kernal with distribution (I am using: Windows Subsystem for Linux (WSL2))
-Distributions: Debian (Package Manager) and Ubuntu (File & System file management)
-A second monitor screen
-I recommend using a Linux native OS vs WSL2
+| Window 11 OS on a laptop |
+| Linux kernal with distribution (I am using: Windows Subsystem for Linux (WSL2)) |
+| Distributions: Debian (Package Manager) and Ubuntu (File & System file management) |
+| A second monitor screen |
+| I recommend using a Linux native OS vs WSL2 |
 
 Prerequisites: List things the user needs before they can run or install your project
 
