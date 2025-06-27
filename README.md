@@ -30,7 +30,7 @@ Windows OS will give you errors, hardship, and compatibilities problems
 because Linux kernal cannot see outside of WSL2; therefore, leading you 
 to find a work around. WSL2 adds a different trail by fire type of learn; however, 
 I also believe that once you have conquered the trails (software and hardware errors or non-compatibilities) 
-one should opt on the side of effciency and performance. Now I have Rocky Linux 9 installed
+one should opt on the side of effciency and performance. Now I have Rocky Linux 10 installed
 on my 5TB external HD because Linux has a wide-range of compatibility with
 different hardwares and softwares.
 
@@ -42,7 +42,9 @@ Technologies Used: This is what I am using to install Linux OS.
 - I recommend using a Linux native OS vs WSL2 
 
 Prerequisites: List things the user needs before they can run or install your project
+Rocky Linux 10: https://rockylinux.org/download
+AMD and Intel 64-bit architectures for x86-64
 
 Installation: Step-by-step guide to set up the project.
-
+https://docs.rockylinux.org/guides/installation/
 Usage: Show how to use the project after installation
