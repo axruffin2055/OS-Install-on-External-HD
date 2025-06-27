@@ -84,7 +84,7 @@ Format the UEFI System Partition:
 sudo mkfs.fat -F32 /dev/sdx1
 
 Format the /boot partition:
-sudo mkfs.ext4 /dev/sdx2
+sudo mkfs.xfs /dev/sdx2
 
 Set up the LVM Physical Volume (Logical Volume Manager (LVM) tool has it's own built-in utilities 
                                 or commands like pvcreate, vgcreate, lvcreate, etc.).
@@ -97,21 +97,32 @@ sudo pvcreate /dev/sdx3     (Initialize the disk or partition to use for LVM)
 Create a Volume Group:
 sudo vgcreate vg_external /dev/sdx3          (Think book cover with title)
 
-Create Logical Volumes as needed. These are the important ones:
+Set Up Swap on LVM
+sudo mkswap /dev/vg_external/lv_swap
+sudo swapon /dev/vg_external/lv_swap      (Initialize it)
 
+Install ZFS	
+sudo apt install zfsutils-linux
+
+
+
+Create a ZFS Pool for recovery/backup
+sudo zpool create recovery_pool /dev/vg_external/lv_recovery && sudo zfs create recovery_pool/backup_data
+Enable compression	(Optional)
+sudo zfs set compression=lz4 recovery_pool
+
+Create Logical Volumes as needed. These are the important ones:
 sudo lvcreate -L 50G -n lv_root vg_external   (Think page with it's chapter title inside book cover)
-sudo lvcreate -L 5G  -n lv_swap vg_external   (Think page with it's chapter title inside book cover)
 sudo lvcreate -L 80G  -n lv_var vg_external   (Think page with it's chapter title inside book cover)
 sudo lvcreate -L 50G  -n lv_tmp vg_external   (Think page with it's chapter title inside book cover)
 sudo lvcreate -L 500G -n lv_home vg_external  (Think page with it's chapter title inside book cover)
 
-Format the logical volume (Now we are creating the filesystem for our lvm):
 
-sudo mkfs.ext4 /dev/vg_external/lv_root
-sudo mkfs.ext4 /dev/vg_external/lv_swap
-sudo mkfs.ext4 /dev/vg_external/lv_var
-sudo mkfs.ext4 /dev/vg_external/lv_tmp
-sudo mkfs.ext4 /dev/vg_external/lv_home
+Format the logical volume (Now we are creating the filesystem for our lvm):
+sudo mkfs.xfs /dev/vg_external/lv_root
+sudo mkfs.xfs /dev/vg_external/lv_var
+sudo mkfs.xfs /dev/vg_external/lv_tmp
+sudo mkfs.xfs /dev/vg_external/lv_home
 
 Now check disk:
 lsblk -f              (The -f will show more info such as LABEL, UUID, FSAVAIL, FSUSE%, FSType, and MOUNTPOINTS. FS means File System)
@@ -189,7 +200,7 @@ Size: 500MB
 Use as: EFI System Partition
 Filesystem: FAT32
 Mount point: /boot/efi
- Create /boot Partition
+Create /boot Partition
 
 Still on the same external drive:
 Create a new partition:
