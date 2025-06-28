@@ -42,9 +42,16 @@ Technologies Used: This is what I am using to install Linux OS.
 - I recommend using a Linux native OS vs WSL2 
 
 Prerequisites: List things the user needs before they can run or install your project
-Rocky Linux 10: https://rockylinux.org/download
-AMD and Intel 64-bit architectures for x86-64
+- Rocky Linux 10: https://rockylinux.org/download
+- AMD and Intel 64-bit architectures for x86-64
+- Balena Etcher downloaded: https://balena.io/etcher
+- External HD (100GB or more for add features)
+- USB flash drive (10GB or more)
 
-Installation: Step-by-step guide to set up the project.
+Installation:
+Use my Step-by-Step OS installation for added information:
+https://github.com/axruffin2055/OS-Install-on-External-HD/blob/main/Step-by-Step
+Use Rocky Linux for straightforward installation:
 https://docs.rockylinux.org/guides/installation/
+
 Usage: Show how to use the project after installation
