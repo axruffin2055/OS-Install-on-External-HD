@@ -1,5 +1,5 @@
 Quote for the mind: 
-Our prime purpose in this life is to help others. 
+-Our prime purpose in this life is to help others. 
 And if you can't help them, at least don't hurt them. 
 Dalai Lama
 
