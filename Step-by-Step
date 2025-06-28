@@ -183,33 +183,34 @@ Select the OS of your choice: Rocky-9.4-x86_64-dvd.iso
 Choose your USB stick (NOT your external HD):
 Click on Flash
 
+Note on Bootloader Installation: (Understand the install processes)
+When you get to the installation summary screen in Anaconda:
+Go to "Installation Destination"
+Select your external hard drive (deselect internal if necessary)
+Click "Custom" for custom partitioning
+Also check the: Full Disk Summary and Bootloader: link 
+to ensure GRUB is installed to the external hard drive (like /dev/sdc or /dev/sdx), 
+and not install to your internal disk.
 
 Now let your computer bootup. 
-We have to boot Rocky 9 into the installer (via USB stick).
-In the Rocky installer, select your external hard drive (/dev/sdx) as the installation target.
-Go through the installer steps: Language, Keyboard, Network, Mirror settings, etc.
+We have to boot Rocky 10 into the Anaconda installer (via USB stick).
+In the Anaconda installer, select your external hard drive (/dev/sdx) as the installation target.
+How to Access the Installation Summary Screen:
+Boot from your Rocky Linux USB/ISO
+Choose “Install Rocky Linux 10.0”
+It will start the Anaconda installer
+After language selection, you’ll reach the Installation Summary screen
+Here you can configure:
+Installation Destination (select external disk)
+Custom partitioning   (Select the partitioning we created)
+Network settings
+Bootloader installation location (under Full Disk Summary and Bootloader)
 
-At Storage configuration, we already created our UEFI System Partition (We took the long and learning way)
-But we could have created, named, set size, and set filesystem type here.
-Choose Custom Storage Layout:
-Select your external drive (e.g. /dev/sdb)
-In the partitioning screen:
-Create a new GPT partition table (if prompted)
-Then create a new partition:
-Size: 500MB
-Use as: EFI System Partition
-Filesystem: FAT32
-Mount point: /boot/efi
-Create /boot Partition
-
-Still on the same external drive:
-Create a new partition:
-Size: 1024MB (1GB)
-Use as: Ext4 (or you can use XFS if you’ve installed xfsprogs, though Ubuntu defaults to ext4 for /boot)
-Mount point: /boot    
-
-Finish Installation
+Finish Installation:
 Continue with the rest of the installation steps (package selection, etc.)
 Once done: Reboot the system.
+
+And congratulations because you have maually configured a OS filesystem 
+and installed a Linux OS!!!! 
 
 
