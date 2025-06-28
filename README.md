@@ -1,7 +1,7 @@
 Quote for the mind: 
--Our prime purpose in this life is to help others. 
-And if you can't help them, at least don't hurt them. 
-Dalai Lama
+- Our prime purpose in this life is to help others. 
+- And if you can't help them, at least don't hurt them. 
+- Dalai Lama
 
 # OS-install-on-external-HD
 https://learning.lpi.org/en/learning-materials/101-500/
