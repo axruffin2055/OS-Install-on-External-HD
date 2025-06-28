@@ -161,28 +161,30 @@ Output:
 
 
 
-Download Operating System of your choice to your C: drive. I am installing Rocky Linux:
+Download Operating System of your choice to your C: drive downloads. I am installing Rocky Linux:
 (https://rockylinux.org/download)
 In the Rocky Linux download page, look for:
-Rocky-9.x-x86_64-dvd.iso
+Rocky-10.x-x86_64-dvd.iso
 And download: CHECKSUM.ios   (Added security on files)
 
-Download a software tool to write the ISO to a bootable USB stick
+Download a software tool to write the ISO as a bootable USB stick
 I am using Balena Etcher:
 Download: https://balena.io/etcher
 
-Open a terminal and execute these command on the file just downloaded:
+Open a terminal and execute these command on the balenaEtcher file just downloaded:
 Make Balena Etcher executable:
-chmod +x balenaEtcher-*-x64.AppImage  (The: * : means you have to add the version of the software you downloaded)
+chmod +x balenaEtcher-<YOUR VERSION>-x64.AppImage  (My version is: balenaEtcher-2.1.2.Setup.exe)
 
 Run it:
-./balenaEtcher-*-x64.AppImage         (My version is: balenaEtcher-2.1.2.Setup.exe)
+./balenaEtcher-<YOUR VERSION>-x64.AppImage         
 
 Open balenaEtcher:
-Select the OS of your choice: Rocky-9.4-x86_64-dvd.iso
+Select the OS of your choice: Rocky-10.4-x86_64-dvd.iso
 Choose your USB stick (NOT your external HD):
 Click on Flash
 
+Install Linux OS from USB stick to external HD:
+But first...
 Note on Bootloader Installation: (Understand the install processes)
 When you get to the installation summary screen in Anaconda:
 Go to "Installation Destination"
@@ -210,7 +212,7 @@ Finish Installation:
 Continue with the rest of the installation steps (package selection, etc.)
 Once done: Reboot the system.
 
-And congratulations because you have maually configured a OS filesystem 
-and installed a Linux OS!!!! 
+And congratulations because you have maually 
+configured a OS filesystem and installed a Linux OS!!!! 
 
 
