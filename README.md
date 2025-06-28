@@ -28,7 +28,7 @@ WSL2 acts as a virtual machine (VM) that mounts Linux kernal to use
 Linux's distributions. Depending on how the Linux kernal is being used,
 Windows OS will give you errors, hardship, and compatibilities problems
 because Linux kernal cannot see outside of WSL2; therefore, leading you 
-to find a work around. WSL2 adds a different trail by fire type of learn; however, 
+to find a work around. WSL2 adds a different trail by fire type of learning; however, 
 I also believe that once you have conquered the trails (software and hardware errors or non-compatibilities) 
 one should opt on the side of effciency and performance. Now I have Rocky Linux 10 installed
 on my 5TB external HD because Linux has a wide-range of compatibility with
