@@ -164,8 +164,12 @@ Output:
 Download Operating System of your choice to your C: drive downloads. I am installing Rocky Linux:
 (https://rockylinux.org/download)
 In the Rocky Linux download page, look for:
-Rocky-10.x-x86_64-dvd.iso
-And download: CHECKSUM.ios   (Added security on files)
+Rocky-10.x-x86_64-dvd.iso           (This is my ISO file)
+And download: CHECKSUM.ios   
+
+Verify the integrity and authenticity of the ISO file you just downloaded  
+before you burn ISO to a USB flash drive using the installer (Balena Etche):  
+grep '<NAME-OF-YOUR-ISO-FILE->' CHECKSUM | sha256sum -c -
 
 Download a software tool to write the ISO as a bootable USB stick
 I am using Balena Etcher:
@@ -173,10 +177,10 @@ Download: https://balena.io/etcher
 
 Open a terminal and execute these command on the balenaEtcher file just downloaded:
 Make Balena Etcher executable:
-chmod +x balenaEtcher-<YOUR VERSION>-x64.AppImage  (My version is: balenaEtcher-2.1.2.Setup.exe)
+chmod +x balenaEtcher-<YOUR VERSION>.Setup.exe  (My version is: balenaEtcher-2.1.2.Setup.exe)
 
 Run it:
-./balenaEtcher-<YOUR VERSION>-x64.AppImage         
+./balenaEtcher-<YOUR VERSION>.Setup.exe           
 
 Open balenaEtcher:
 Select the OS of your choice: Rocky-10.4-x86_64-dvd.iso
