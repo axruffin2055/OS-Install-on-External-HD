@@ -38,7 +38,7 @@ Technologies Used: This is what I am using to install Linux OS.
 - Window 11 OS on a laptop 
 - Linux kernal (WSL2 )with distribution 
 - Distributions: Debian (Package Manager) and Ubuntu (File & System file management) 
-- A second monitor screen 
+- A second monitor screen   (Optional)
 - I recommend using a Linux native OS vs WSL2
 
 Prerequisites: 
@@ -51,7 +51,8 @@ Prerequisites:
 Installation:  
 Use my Step-by-Step OS installation for added information:  
 https://github.com/axruffin2055/OS-Install-on-External-HD/blob/main/Step-by-Step  
-Use Rocky Linux for straightforward installation:  
+OR  
+Use Rocky Linux website for straightforward installation:  
 https://docs.rockylinux.org/guides/installation/
 
-Usage: Show how to use the project after installation
+And enjoy the new Linux OS!!!
