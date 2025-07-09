@@ -19,8 +19,22 @@ sde      8:64   0   4.8T  0 disk   (/dev/sde is my external HD)
 
 On /dev/sdx follow the steps (!!! The: x : is replaced by the letter of your external HD) 
 
-Step-by-Step
+Another thing, we are about to create our partitions with filesystem types on the external HD disk 
+manually using WLS2 or Linux OS; however, the partitions and filesystem types can be created manually 
+or automatically durning Linux OS installation (We can create everything when we install Rocky Linux 10). 
+If you want to install Linux OS automatically or create partitions and filesystem types (A bit more easier)  
+during installation setup then...  
 
+Scroll down and look for this note:
+!!!!!!!!!!!You want to create just install Rocky Linux or you want to manully create partition and   
+           filesystem type use durning installion. If you already create partition and filesystem,  
+           please continue below as well.!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+Everyone else continue Step-by-Step.
+If needed, backup all information on external HD.
+
+
+Step-by-Step
 Wipe existing partition table clean:
 sudo wipefs -a /dev/sdx     (!!!Replace the: x : in sdx... I have to use: sudo wipefs -a /dev/sde: 
                               Because my external HD or disk is sde)
@@ -73,7 +87,7 @@ sdb      8:16   0   186M  1 disk
 sdc      8:32   0     8G  0 disk [SWAP]
 sdd      8:48   0     1T  0 disk /mnt/wslg/distro
                                  /
-sde      8:64   0   4.5T  0 disk     (Created parted disks below)
+sde      8:64   0   4.5T  0 disk     (Created parted disk below)
 ├─sde1   8:65   0   512M  0 part     (Will be used for /boot/efi)
 ├─sde2   8:66   0   512M  0 part     (Will be used for kernel & initramfs)
 └─sde3   8:67   0   4.5T  0 part     (Will be used for LVM. Think of LVM similar to a bookshelf or book manager)
@@ -99,11 +113,11 @@ sudo vgcreate vg_external /dev/sdx3          (Think book cover with title)
 
 Set Up Swap on LVM
 sudo mkswap /dev/vg_external/lv_swap
-sudo swapon /dev/vg_external/lv_swap      (Initialize it)
+sudo swapon /dev/vg_external/lv_swap         (Initialize it)
 
-Install ZFS	
+
+Install ZFS	       (This part is optional)
 sudo apt install zfsutils-linux
-
 
 
 Create a ZFS Pool for recovery/backup
@@ -132,15 +146,15 @@ sde
 ├─sde2  ext4   1.0         42e3dfe1-8fc4-4b3c-bb52-559e92f768af
 └─sde3  LVM2_m LVM2        tT2hxn-2HoH-LUDB-lUMi-b91l-bH8B-Blbaw8
   ├─vg_external-lv_root
-  │     ext4   1.0         27b347c9-6a9d-4321-9b6f-33ff727b1778
+  │     xfs   1.0         27b347c9-6a9d-4321-9b6f-33ff727b1778
   ├─vg_external-lv_swap
-  │     ext4   1.0         2db480b6-f456-4027-ad5b-718d37e6e4a4
+  │     xfs   1.0         2db480b6-f456-4027-ad5b-718d37e6e4a4
   ├─vg_external-lv_var
-  │     ext4   1.0         1cdced7d-b8a3-4dad-87dc-d208c48bd481
+  │     xfs   1.0         1cdced7d-b8a3-4dad-87dc-d208c48bd481
   ├─vg_external-lv_tmp
-  │     ext4   1.0         957e5272-5200-44c6-9885-bd2fad2925ed
+  │     xfs   1.0         957e5272-5200-44c6-9885-bd2fad2925ed
   └─vg_external-lv_home
-        ext4   1.0         1170d3ca-f387-47e2-9d94-9d41374a51e9
+        xfs   1.0         1170d3ca-f387-47e2-9d94-9d41374a51e9
 
 Or you can use lvm's command to check the volume group (VG):
 vgs
@@ -159,7 +173,9 @@ Output:
   lv_tmp  vg_external -wi-a-----  50.00g             customizing our filesystem (FS))
   lv_var  vg_external -wi-a-----  90.00g
 
-
+!!!!!!!!!!!You want to create just install Rocky Linux or you want to manully create partition and   
+           filesystem type use durning installion. If you already create partition and filesystem,  
+           please continue below as well.!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 Download Operating System of your choice to your C: drive downloads. I am installing Rocky Linux:
 (https://rockylinux.org/download)
