@@ -156,15 +156,28 @@ sde
   └─vg_external-lv_home
         xfs   1.0         1170d3ca-f387-47e2-9d94-9d41374a51e9
 
-Or you can use lvm's command to check the volume group (VG):
-vgs
+If needed load LVM Kernel Modules because on some live environments or half Linux systems,   
+the dm-mod module might not load automatically.
+sudo modprobe dm-mod
+
+Scan for Physical Volumes
+sudo pvscan
+
+This will finds all physical volume that are part of LVM.
+Scan and Activate Volume Groups:
+sudo vgscan
+sudo vgchange -ay    (LVM needs to be activated in order to use LVM's commands)
+
+    
+Use lvm's command to check the volume group (VG):
+sudo vgs
 Output:
  VG          #PV #LV #SN Attr   VSize  VFree
  vg_external   1   5   0 wz--n- <4.55t <3.77t     (In VG you can manage many parted disks. LVM manage partition disk similar to books. VG manage parted disk 
                                                    similar to pages. Here we have one partition named vg_external, but think, we have one book with a title)
 
 And use lvm's command to check the the Logical Volume (LV)
-lvs
+sudo lvs
 Output:
  LV      VG          Attr       LSize   Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
   lv_home vg_external -wi-a----- 600.00g            (Notice how each LV or parted disk such as lv_home,  
