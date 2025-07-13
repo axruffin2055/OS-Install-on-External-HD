@@ -1,21 +1,30 @@
 # OS-install-on-external-HD
+
 Configure the BIOS:
 Restart your computer. While it is booting up, hold or keep pressing the delete or F12 or F3 or etc button.
 You are now in the BIOS configuration menu.
 Select the boot menu:
 Make sure your BIOS/UEFI is set to boot in UEFI mode.
-Take a picture of the boot options numbered 1 - 5 (You need to change it back or if you do not change back, remove the USB flash drive every time you boot your computer)
+Take a picture of the boot options numbered 1 - 5 (If grub2 or systemd is not manually configured,  
+                                                   then you may need to change it back)
 Change #1 Boot option to Flash or USB so your computer can boot up using the USB stick             
 
 Locate your disk or External HD:
 lsblk    (This command will list block devices) 
 Output:
-sda      8:0    0 388.4M  1 disk
-sdb      8:16   0   186M  1 disk
-sdc      8:32   0     8G  0 disk [SWAP]
-sdd      8:48   0     1T  0 disk /mnt/wslg/distro
-                                 /
-sde      8:64   0   4.8T  0 disk   (/dev/sde is my external HD)
+NAME                         MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS
+sda                          8:64     0   4.8T  0 disk   (/dev/sda is my external HD)
+nvme0n1                      259:0    0   1.8T  0 disk   (This is my Windows 11)
+├─nvme0n1p1                  259:1    0   513M  0 part   
+├─nvme0n1p2                  259:2    0    16M  0 part 
+├─nvme0n1p3                  259:3    0 363.4G  0 part 
+├─nvme0n1p4                  259:4    0   642M  0 part 
+└─nvme0n1p5                  259:5    0   1.5T  0 part   (This is openSUSE OS dual booted with Windows 11)
+  ├─vg_openSUSE-lv_swap      253:4    0     5G  0 lvm  
+  ├─vg_openSUSE-lv_home      253:5    0   640G  0 lvm  
+  ├─vg_openSUSE-lv_var       253:6    0    50G  0 lvm  
+  └─vg_openSUSE-lv_root      253:7    0    90G  0 lvm  
+
 
 On /dev/sdx follow the steps (!!! The: x : is replaced by the letter of your external HD) 
 
@@ -25,9 +34,9 @@ or automatically durning Linux OS installation (We can create everything when we
 If you want to install Linux OS automatically or create partitions and filesystem types (A bit more easier)  
 during installation setup then...  
 
-Scroll down and look for this note:
-!!!!!!!!!!!You want to create just install Rocky Linux or you want to manully create partition and   
-           filesystem type use durning installion. If you already create partition and filesystem,  
+Scroll down below and look for this note:
+!!!!!!!!!!!You want to just install Rocky Linux or you want to install, and manually create partition  
+           and filesystem types durning installion. If you already create partition and filesystem,  
            please continue below as well.!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 Everyone else continue Step-by-Step.
@@ -36,13 +45,14 @@ If needed, backup all information on external HD.
 
 Step-by-Step
 Wipe existing partition table clean:
-sudo wipefs -a /dev/sdx     (!!!Replace the: x : in sdx... I have to use: sudo wipefs -a /dev/sde: 
-                              Because my external HD or disk is sde)
+sudo wipefs -a /dev/sdx     (!!!Replace the: x : in sdx... I have to use: sudo wipefs -a /dev/sda: 
+                              Because my external HD or disk is sda)
 Output:
-/dev/sde: 8 bytes were erased at offset 0x00000200 (gpt): 45 46 49 20 50 41 52 54
-/dev/sde: 8 bytes were erased at offset 0x48c61b35c00 (gpt): 45 46 49 20 50 41 52 54
-/dev/sde: 2 bytes were erased at offset 0x000001fe (PMBR): 55 aa
-/dev/sde: calling ioctl to re-read partition table: Success
+/dev/sda: 8 bytes were erased at offset 0x00000200 (gpt): 45 46 49 20 50 41 52 54
+/dev/sda: 8 bytes were erased at offset 0x48c61b35c00 (gpt): 45 46 49 20 50 41 52 54
+/dev/sda: 2 bytes were erased at offset 0x000001fe (PMBR): 55 aa
+/dev/sda: calling ioctl to re-read partition table: Success
+
 sudo parted /dev/sdx mklabel gpt     (UEFI is designed to work with GPT)
 Output: Information: You may need to update /etc/fstab.  (Do not worry about /etc/fstab because this is about 
                                                           auto mount filesystems at boot)
@@ -65,7 +75,7 @@ Check partition layout:
 print
 Output:
 Model: Seagate Portable (scsi)      (External HD name)
-Disk /dev/sde: 4769307MiB           (4.7TB of disk space in MiB)
+Disk /dev/sda: 4769307MiB           (4.7TB of disk space in MiB)
 Sector size (logical/physical): 512B/4096B
 Partition Table: gpt                (Using the lates partition organizer vs mbr)
 Disk Flags:
@@ -81,16 +91,23 @@ quit
 Now check your disk space or block:
 lsblk
 Output:
-NAME   MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS
-sda      8:0    0 388.4M  1 disk
-sdb      8:16   0   186M  1 disk
-sdc      8:32   0     8G  0 disk [SWAP]
-sdd      8:48   0     1T  0 disk /mnt/wslg/distro
-                                 /
-sde      8:64   0   4.5T  0 disk     (Created parted disk below)
-├─sde1   8:65   0   512M  0 part     (Will be used for /boot/efi)
-├─sde2   8:66   0   512M  0 part     (Will be used for kernel & initramfs)
-└─sde3   8:67   0   4.5T  0 part     (Will be used for LVM. Think of LVM similar to a bookshelf or book manager)
+NAME                         MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS
+sda      8:64   0   4.5T  0 disk     (Created parted disk below)
+├─sda1   8:65   0   512M  0 part     (Will be used for /boot/efi or partition table)
+├─sda2   8:66   0   512M  0 part     (Will be used for /boot or kernel & initramfs)
+└─sda3   8:67   0   4.5T  0 part     (Will be used for LVM. Think of LVM similar to a bookshelf or book manager)
+
+nvme0n1                      259:0    0   1.8T  0 disk 
+├─nvme0n1p1                  259:1    0   513M  0 part 
+├─nvme0n1p2                  259:2    0    16M  0 part 
+├─nvme0n1p3                  259:3    0 363.4G  0 part 
+├─nvme0n1p4                  259:4    0   642M  0 part 
+└─nvme0n1p5                  259:5    0   1.5T  0 part 
+  ├─vg_openSUSE-lv_swap      253:4    0     5G  0 lvm  
+  ├─vg_openSUSE-lv_home      253:5    0   640G  0 lvm  
+  ├─vg_openSUSE-lv_var       253:6    0    50G  0 lvm  
+  └─vg_openSUSE-lv_root      253:7    0    90G  0 lvm  
+
 
 
 Format the Partitions (We are creating/setting the filesystems on our LVM's partitions).
@@ -141,26 +158,33 @@ sudo mkfs.xfs /dev/vg_external/lv_home
 Now check disk:
 lsblk -f              (The -f will show more info such as LABEL, UUID, FSAVAIL, FSUSE%, FSType, and MOUNTPOINTS. FS means File System)
 Output:
-sde
-├─sde1  vfat   FAT32       A8A4-C070
-├─sde2  ext4   1.0         42e3dfe1-8fc4-4b3c-bb52-559e92f768af
-└─sde3  LVM2_m LVM2        tT2hxn-2HoH-LUDB-lUMi-b91l-bH8B-Blbaw8
-  ├─vg_external-lv_root
-  │     xfs   1.0         27b347c9-6a9d-4321-9b6f-33ff727b1778
-  ├─vg_external-lv_swap
-  │     xfs   1.0         2db480b6-f456-4027-ad5b-718d37e6e4a4
-  ├─vg_external-lv_var
-  │     xfs   1.0         1cdced7d-b8a3-4dad-87dc-d208c48bd481
-  ├─vg_external-lv_tmp
-  │     xfs   1.0         957e5272-5200-44c6-9885-bd2fad2925ed
-  └─vg_external-lv_home
-        xfs   1.0         1170d3ca-f387-47e2-9d94-9d41374a51e9
+NAME                         FSTYPE      FSVER    LABEL UUID                                   FSAVAIL FSUSE% MOUNTPOINTS
+sda                                                                                                           
+├─sda1                       vfat        FAT32          A9CC-878E                               411.7M    19% /boot/efi
+├─sda2                       xfs                        4c36ac72-8ab8-42bd-ae52-6ade100319ed     35.5M    92% /boot
+└─sda3                       LVM2_member LVM2 001       JeNHCm-ZzZn-ev6M-JPsT-Xazo-wyOr-1sDcie                
+  ├─vg_external_Seagate-swap swap        1              1fe39303-fbe4-4a0f-aaa6-50a66d4a169b                  [SWAP]
+  ├─vg_external_Seagate-root xfs                        a770af0e-bc90-4955-bea5-c03ae04db49c     41.8G    16% /
+  ├─vg_external_Seagate-var  xfs                        cba9fd60-ef89-4c22-935a-6a60ef56d058     95.7G     4% /var
+  └─vg_external_Seagate-home xfs                        6ca599a5-a22f-4715-a7e6-b2680b92617c    570.4G     5% /home
+nvme0n1                                                                                                       
+├─nvme0n1p1                  vfat        FAT32    EFI   E305-A333                                             
+├─nvme0n1p2                                                                                                   
+├─nvme0n1p3                  ntfs                       0E7CEA327CEA13ED                                      
+├─nvme0n1p4                  ntfs                       C29AEDFA9AEDEB3D                                      
+└─nvme0n1p5                  LVM2_member LVM2 001       Yl8OMo-74rQ-egDq-ciDv-oSao-Z14U-l2FA7c                
+  ├─vg_openSUSE-lv_swap      swap        1              f412f8ad-3d0e-4c08-9b0d-3207433ee28c                  
+  ├─vg_openSUSE-lv_home      ext4        1.0            54de1ec0-ffaf-40cd-8c70-787750cebc2c                  
+  ├─vg_openSUSE-lv_var       xfs                        c3cc96c7-6521-4319-9ff8-8cb2f21c9694                  
+  └─vg_openSUSE-lv_root      btrfs                      1a502702-2c77-407c-9bd8-b8ce0472115e                  
 
-If needed load LVM Kernel Modules because on some live environments or half Linux systems,   
+
+If needed, load LVM Kernel Modules because on some live environments or half Linux systems,   
 the dm-mod module might not load automatically.
+Load LVM Kernel Modules:
 sudo modprobe dm-mod
 
-Scan for Physical Volumes
+Scan for Physical Volumes:
 sudo pvscan
 
 This will finds all physical volume that are part of LVM.
@@ -186,8 +210,8 @@ Output:
   lv_tmp  vg_external -wi-a-----  50.00g             customizing our filesystem (FS))
   lv_var  vg_external -wi-a-----  90.00g
 
-!!!!!!!!!!!You want to create just install Rocky Linux or you want to manully create partition and   
-           filesystem type use durning installion. If you already create partition and filesystem,  
+!!!!!!!!!!!You want to just install Rocky Linux or you want to install, and manually create partition  
+           and filesystem types durning installion. If you already create partition and filesystem,  
            please continue below as well.!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 Download Operating System of your choice to your C: drive downloads. I am installing Rocky Linux:
@@ -245,7 +269,7 @@ Finish Installation:
 Continue with the rest of the installation steps (package selection, etc.)
 Once done: Reboot the system.
 
-And congratulations because you have maually partitioned and 
+And congratulations because you have manually partitioned and 
 configured a OS filesystem and installed a Linux OS!!!! 
 
 
