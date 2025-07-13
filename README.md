@@ -34,7 +34,7 @@ one should opt on the side of effciency and performance. Now I have Rocky Linux 
 on my 5TB external HD because Linux has a wide-range of compatibility with
 different hardwares and softwares.  
 
-Technologies Used: This is what I am using to install Linux OS.
+Technologies Used: 
 - Window 11 OS on a laptop 
 - Linux kernal (WSL2 )with distribution 
 - Distributions: Debian (Package Manager) and Ubuntu (File & System file management) 
