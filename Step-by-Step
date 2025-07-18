@@ -160,23 +160,23 @@ lsblk -f              (The -f will show more info such as LABEL, UUID, FSAVAIL, 
 Output:
 NAME                         FSTYPE      FSVER    LABEL UUID                                   FSAVAIL FSUSE% MOUNTPOINTS
 sda                                                                                                           
-├─sda1                       vfat        FAT32          A9CC-878E                               411.7M    19% /boot/efi
-├─sda2                       xfs                        4c36ac72-8ab8-42bd-ae52-6ade100319ed     35.5M    92% /boot
-└─sda3                       LVM2_member LVM2 001       JeNHCm-ZzZn-ev6M-JPsT-Xazo-wyOr-1sDcie                
-  ├─vg_external_Seagate-swap swap        1              1fe39303-fbe4-4a0f-aaa6-50a66d4a169b                  [SWAP]
-  ├─vg_external_Seagate-root xfs                        a770af0e-bc90-4955-bea5-c03ae04db49c     41.8G    16% /
-  ├─vg_external_Seagate-var  xfs                        cba9fd60-ef89-4c22-935a-6a60ef56d058     95.7G     4% /var
-  └─vg_external_Seagate-home xfs                        6ca599a5-a22f-4715-a7e6-b2680b92617c    570.4G     5% /home
+├─sda1                       vfat        FAT32          xxxxxxxxxxx                              411.7M    19% /boot/efi
+├─sda2                       xfs                        xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx    35.5M    92% /boot
+└─sda3                       LVM2_member LVM2 001       xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx                
+  ├─vg_external_Seagate-swap swap        1              xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx                  [SWAP]
+  ├─vg_external_Seagate-root xfs                        xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx    41.8G    16% /
+  ├─vg_external_Seagate-var  xfs                       xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx     95.7G     4% /var
+  └─vg_external_Seagate-home xfs                        xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx    570.4G     5% /home
 nvme0n1                                                                                                       
-├─nvme0n1p1                  vfat        FAT32    EFI   E305-A333                                             
+├─nvme0n1p1                  vfat        FAT32    EFI   xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx                                             
 ├─nvme0n1p2                                                                                                   
-├─nvme0n1p3                  ntfs                       0E7CEA327CEA13ED                                      
-├─nvme0n1p4                  ntfs                       C29AEDFA9AEDEB3D                                      
-└─nvme0n1p5                  LVM2_member LVM2 001       Yl8OMo-74rQ-egDq-ciDv-oSao-Z14U-l2FA7c                
-  ├─vg_openSUSE-lv_swap      swap        1              f412f8ad-3d0e-4c08-9b0d-3207433ee28c                  
-  ├─vg_openSUSE-lv_home      ext4        1.0            54de1ec0-ffaf-40cd-8c70-787750cebc2c                  
-  ├─vg_openSUSE-lv_var       xfs                        c3cc96c7-6521-4319-9ff8-8cb2f21c9694                  
-  └─vg_openSUSE-lv_root      btrfs                      1a502702-2c77-407c-9bd8-b8ce0472115e                  
+├─nvme0n1p3                  ntfs                       xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx                                      
+├─nvme0n1p4                  ntfs                       xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx                                    
+└─nvme0n1p5                  LVM2_member LVM2 001       xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx                
+  ├─vg_openSUSE-lv_swap      swap        1              xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx                  
+  ├─vg_openSUSE-lv_home      ext4        1.0            5xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx                  
+  ├─vg_openSUSE-lv_var       xfs                        xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx                 
+  └─vg_openSUSE-lv_root      btrfs                      xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx                 
 
 
 If needed, load LVM Kernel Modules because on some live environments or half Linux systems,   
