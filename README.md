@@ -4,12 +4,12 @@ And if you can't help them, at least don't hurt them.
 Dalai Lama
 
 # OS-install-on-external-HD
-https://learning.lpi.org/en/learning-materials/101-500/
+[Install and configure a computer running Linux and configure basic networking](https://learning.lpi.org/en/learning-materials/101-500/)
 
 Introduction:  
 Hi everyone,  
 I just want to let everyone know that most of my deep multi-layer Linux Administrator knowledge comes from two books. 
-This is one of them: https://learning.lpi.org/en/learning-materials/101-500/. Most of the topics and skills used on this project,
+This is one of them: [Linux Professional Institute book](https://learning.lpi.org/en/learning-materials/101-500/). Most of the topics and skills used on this project,
 are studied, learned, and practiced from Linux Professional Institute (LPI). Also, I highly recommend learning Linux from the beginning. 
 Start from the buttom ground and learn up. You maybe surprised on what you know verse how the book clearly break down technologies.
 
@@ -20,7 +20,7 @@ Master Boot Record (MBR) vs GUID Partition Table (GPT), Unified Extensible Firmw
 Logical Volume Manager (LVM), and OS file system types.
 We will be manually configuring the OS that is being install to the HD. 
 Again, topic can be better understood by using LPI's book: 
-https://learning.lpi.org/en/learning-materials/101-500/
+[Linux Professional Institute book](https://learning.lpi.org/en/learning-materials/101-500/)
 
 Features:  
 I am using Windows Subsystem for Linux (WSL2), which runs beside Windows 11 OS.
@@ -50,9 +50,9 @@ Prerequisites:
 
 Installation:  
 Use my Step-by-Step OS installation for added information:  
-https://github.com/axruffin2055/OS-Install-on-External-HD/blob/main/Step-by-Step  
+[My Step-by-Step](https://github.com/axruffin2055/OS-Install-on-External-HD/blob/main/Step-by-Step)  
 OR  
 Use Rocky Linux website for straightforward installation:  
-https://docs.rockylinux.org/guides/installation/
+[Rocky Linux website](https://docs.rockylinux.org/guides/installation/)
 
 And enjoy the new Linux OS!!!
